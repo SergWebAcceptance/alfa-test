@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import CheckoutForm from "./_components/CheckoutForm";
 import { useCart } from "@/src/contexts/CartContext";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
-  "pk_test_51NqBxiKIaUr11rEE3g6JbHcyjYFORC2NhUDNEHL8fH6DmnOL0v5FfBif5487U9h8vsfqNBYdgL81PYZbphkfdQMg00HDi7Y103"
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY
 );
 
 function parsePageParams(paramValue) {
@@ -24,7 +24,7 @@ function parsePageParams(paramValue) {
   return null;
 }
 
-function Checkout() {
+function CheckoutContent() {
   const { currentUser } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -94,6 +94,14 @@ function Checkout() {
         </Elements>
       )}
     </>
+  );
+}
+
+function Checkout() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CheckoutContent />
+    </Suspense>
   );
 }
 
