@@ -1,7 +1,8 @@
-"use client";
+
 import React from "react";
 import { getProduct } from "../../api/products";
 import AddToCartButton from "@/src/components/AddToCartButton";
+
 
 async function SingleProduct({ params: { slug } }) {
   const product = await getProduct(slug);

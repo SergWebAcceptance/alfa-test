@@ -24,7 +24,7 @@ export default async function ProductsList() {
                 key={product.slug}
                 className="flex flex-col overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <Link href={`/products/${product.slug}`}>
+                <Link href={`/products/${product.slug}`} passHref>
                   <div className="group block">
                     <div className="flex-shrink-0">
                       <img
