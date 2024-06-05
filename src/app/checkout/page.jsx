@@ -9,6 +9,7 @@ import { useAuth } from "@/src/contexts/AuthContext";
 import { getProductById } from "../api/products";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useCurrency } from "@/src/contexts/CurrencyContext";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY
@@ -31,6 +32,7 @@ function CheckoutContent() {
   const { cart, totalAmount, addToCart } = useCart();
   const [cartLength, setCartLength] = useState(0);
   const [utmSource, setUtmSource] = useState("");
+  const { setSelectedCurrency } = useCurrency();
 
   useEffect(() => {
     setCartLength(cart.length);
@@ -39,9 +41,15 @@ function CheckoutContent() {
   useEffect(() => {
     const productIdParam = searchParams.get("add-to-cart");
     const utmSourceParam = searchParams.get("utm_source");
+    const currencyParam = searchParams.get("currency");
+    
 
     const productId = parsePageParams(productIdParam);
     const utmSourceValue = utmSourceParam;
+
+    if(currencyParam){
+      setSelectedCurrency(currencyParam);
+    }
 
     if (utmSourceValue) {
       setUtmSource(utmSourceValue);
