@@ -416,7 +416,7 @@ const CheckoutForm = ({ utmSource }) => {
               </h3>
 
               <button
-                className="block w-full mt-4 rounded bg-primary px-5 py-3 text-sm text-gray-100 transition hover:bg-blue-700"
+                className="block w-full mt-4 rounded bg-primary px-5 py-3 text-sm text-gray-100 transition hover:bg-primary"
                 type="submit"
               >
                 Submit

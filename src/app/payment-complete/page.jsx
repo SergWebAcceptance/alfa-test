@@ -17,7 +17,7 @@ function PaymentCompletePage() {
           </p>
           <Link
             href="/"
-            className="mt-4 inline-block bg-primary text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700"
+            className="mt-4 inline-block bg-primary text-white font-semibold px-6 py-2 rounded-lg hover:bg-primary"
           >
             Go to Homepage
           </Link>

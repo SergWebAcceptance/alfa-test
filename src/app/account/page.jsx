@@ -38,7 +38,7 @@ export default function Account() {
                 href="#"
                 data-id={openIndex}
                 aria-current="page"
-                className={`inline-flex items-center px-5 py-2.5 gap-2 rounded-lg w-full ${openIndex === 1 ? 'active bg-blue-700 text-white' : 'bg-gray-50 text-gray-700'}`}
+                className={`inline-flex items-center px-5 py-2.5 gap-2 rounded-lg w-full ${openIndex === 1 ? 'active bg-primary text-white' : 'bg-gray-50 text-gray-700'}`}
                 onClick={() => toggleItem(1)}
               >
                 <PackageCheck />
@@ -49,7 +49,7 @@ export default function Account() {
               <a
                 href="#"
                 data-id={openIndex}
-                className={`inline-flex items-center px-5 py-2.5 gap-2 rounded-lg w-full ${openIndex === 2 ? 'active bg-blue-700 text-white' : 'bg-gray-50 text-gray-700'}`}
+                className={`inline-flex items-center px-5 py-2.5 gap-2 rounded-lg w-full ${openIndex === 2 ? 'active bg-primary text-white' : 'bg-gray-50 text-gray-700'}`}
                 onClick={() => toggleItem(2)}
               >
                 <FilePenLine />

@@ -18,12 +18,12 @@ function AddToCartButton({ product }) {
   return (
     <>
       {existingIndex > -1 ? (
-        <button disabled className="flex gap-2 items-center rounded-md bg-primary hover:bg-blue-700 px-8 mt-5 py-3 text-sm font-medium text-white shadow">
+        <button disabled className="flex gap-2 items-center rounded-md bg-primary hover:bg-primary px-8 mt-5 py-3 text-sm font-medium text-white shadow">
           <Check/> Already in cart 
         </button>
       ) : (
         <button
-          className="flex gap-2 items-center rounded-md bg-primary hover:bg-blue-700 px-8 mt-5 py-3 text-sm font-medium text-white shadow"
+          className="flex gap-2 items-center rounded-md bg-primary hover:bg-primary px-8 mt-5 py-3 text-sm font-medium text-white shadow"
           onClick={() => handleAddToCart(product)}
         >
           <ShoppingCart/>
