@@ -84,7 +84,7 @@ export default function Login() {
                 <div style={{ color: "red" }}>{formik.errors.email}</div>
               )}
 
-              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <span className="absolute inset-y-0 end-0 grid place-content-center px-4 opacity-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="size-4 text-gray-400"
@@ -122,7 +122,7 @@ export default function Login() {
                 <div style={{ color: "red" }}>{formik.errors.password}</div>
               )}
 
-              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <span className="absolute inset-y-0 end-0 grid place-content-center px-4 opacity-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="size-4 text-gray-400"
@@ -158,12 +158,6 @@ export default function Login() {
             <div style={{ color: "red" }}>{formik.errors.submit}</div>
           )}
 
-          <p className="text-center text-sm text-gray-500">
-            No account?
-            <Link className="underline" href="/sign-up">
-              Sign up
-            </Link>
-          </p>
         </form>
       </div>
     </div>
