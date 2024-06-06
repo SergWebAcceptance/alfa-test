@@ -1,10 +1,21 @@
-import React, { Suspense } from "react";
+'use client';
+
+import React, { Suspense, useEffect, useState } from "react";
 import { getProduct } from "../../api/products";
 import AddToCartButton from "@/src/components/AddToCartButton";
 import Preloader from "@/src/components/Preloader";
 
-const SingleProduct = async ({ params: { slug } }) => {
-  const product = await getProduct(slug);
+const SingleProduct = ({ params: { slug } }) => {
+  const [product, setProduct] = useState();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const singleProduct = await getProduct(slug);
+      setProduct(singleProduct);
+    }
+    fetchProduct();
+  }, []);
+  
 
   return (
     <>
@@ -54,10 +65,4 @@ const SingleProduct = async ({ params: { slug } }) => {
   );
 };
 
-const SingleProductWrapper = (props) => (
-  <Suspense fallback={<Preloader />}>
-    <SingleProduct {...props} />
-  </Suspense>
-);
-
-export default SingleProductWrapper;
+export default SingleProduct;
