@@ -51,7 +51,7 @@ const getCountryOptionByCode = (code) => {
   return countries.find((country) => country.value === code);
 };
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ utmSource }) => {
   const { cart, totalAmount, clearCart } = useCart();
   const { currentUser, setCurrentUser } = useAuth();
   const [paymentMethods, setPaymentMethods] = useState([]);
@@ -166,6 +166,12 @@ const CheckoutForm = () => {
         customer_id: userId,
         line_items: lineItems,
         currency: selectedCurrency,
+        meta_data: [
+          {
+            key: 'utm_source',
+            value: utmSource,
+          },
+        ],
       };
 
       const order = await createOrder(orderData);
