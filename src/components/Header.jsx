@@ -10,6 +10,7 @@ import { useCart } from "../contexts/CartContext";
 function Header() {
   const { currentUser, setCurrentUser } = useAuth();
   const { cartQuantity } = useCart();
+  const [user, setUser] = useState();
 
   const [displayQuantity, setDisplayQuantity] = useState(0);
 
@@ -18,8 +19,8 @@ function Header() {
   }, [cartQuantity]);
 
   useEffect(() => {
-    console.log("Page loaded");
-  }, []);
+    setUser(currentUser);
+  }, [currentUser]);
 
   return (
     <>
@@ -34,12 +35,12 @@ function Header() {
 
             <div className="flex items-center gap-4">
               <Link
-                href={"/cart"}
+                href={"/checkout"}
                 className="flex items-center gap-1 text-black"
               >
                 <ShoppingCart /> ({displayQuantity ? displayQuantity : 0})
               </Link>
-              {!currentUser ? (
+              {!user ? (
                 <div className="sm:flex sm:gap-4">
                   <Link
                     className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow"

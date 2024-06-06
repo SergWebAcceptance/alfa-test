@@ -1,10 +1,9 @@
-
-import React from "react";
+import React, { Suspense } from "react";
 import { getProduct } from "../../api/products";
 import AddToCartButton from "@/src/components/AddToCartButton";
+import Preloader from "@/src/components/Preloader";
 
-
-async function SingleProduct({ params: { slug } }) {
+const SingleProduct = async ({ params: { slug } }) => {
   const product = await getProduct(slug);
 
   return (
@@ -39,7 +38,7 @@ async function SingleProduct({ params: { slug } }) {
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
                 <h2 className="text-[20px] sm:text-[24px] font-semibold mt-5 text-primary">
-                € {product.price}
+                  € {product.price}
                 </h2>
                 <AddToCartButton product={product} />
               </div>
@@ -53,6 +52,12 @@ async function SingleProduct({ params: { slug } }) {
       </div>
     </>
   );
-}
+};
 
-export default SingleProduct;
+const SingleProductWrapper = (props) => (
+  <Suspense fallback={<Preloader />}>
+    <SingleProduct {...props} />
+  </Suspense>
+);
+
+export default SingleProductWrapper;

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getProductsByCategory, getProducts } from "../app/api/products";
 import Link from "next/link";
+import AddToCartButton from "./AddToCartButton";
+import Preloader from "./Preloader";
 
-export default async function ProductsList() {
-  // const products = await getProductsByCategory("House");
+const ProductsList = async () => {
   const products = await getProducts();
   return (
     <>
@@ -13,9 +14,7 @@ export default async function ProductsList() {
             <h2 className="text-3xl font-extrabold text-black bg-clip-text md:text-5xl">
               Shop
             </h2>
-            <p className="mt-3 max-w-2xl mx-auto text-gray-500">
-              
-            </p>
+            <p className="mt-3 max-w-2xl mx-auto text-gray-500"></p>
           </header>
 
           <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -24,28 +23,38 @@ export default async function ProductsList() {
                 key={product.slug}
                 className="flex flex-col overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <Link href={`/products/${product.slug}`} passHref>
+                <div>
                   <div className="group block">
-                    <div className="flex-shrink-0">
+                    <Link
+                      className="flex-shrink-0"
+                      href={`/products/${product.slug}`}
+                      passHref
+                    >
                       <img
                         src={product.image.sourceUrl}
                         alt={product.name}
                         className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                    </div>
+                    </Link>
 
-                    <div className="flex flex-1 flex-col justify-between bg-white p-4">
+                    <Link
+                      className="flex flex-1 flex-col justify-between bg-white p-4 pb-0"
+                      href={`/products/${product.slug}`}
+                      passHref
+                    >
                       <h3 className="mt-2 text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">
                         {product.name}
                       </h3>
 
                       <p className="mt-4 text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300">
-                        <span className="sr-only">Price:</span> € 
-                        {product.price}
+                        <span className="sr-only">Price:</span> €{product.price}
                       </p>
+                    </Link>
+                    <div className="ustify-between bg-white px-4 pb-4">
+                      <AddToCartButton product={product} />
                     </div>
                   </div>
-                </Link>
+                </div>
               </li>
             ))}
           </ul>
@@ -53,4 +62,12 @@ export default async function ProductsList() {
       </section>
     </>
   );
-}
+};
+
+const ProductsListWrapper = () => (
+  <Suspense fallback={<Preloader />}>
+    <ProductsList />
+  </Suspense>
+);
+
+export default ProductsListWrapper;
