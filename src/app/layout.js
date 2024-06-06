@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Alfa Test",
   description: "Alfa Test",
+  robots: 'noindex, nofollow',
 };
 
 export default function RootLayout({ children }) {
