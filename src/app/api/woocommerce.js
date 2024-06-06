@@ -5,9 +5,6 @@ const url = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
 const consumerKey = process.env.NEXT_PUBLIC_WORDPRESS_CONSUMER_KEY;
 const consumerSecret = process.env.NEXT_PUBLIC_WORDPRESS_CONSUMER_SECRET;
 
-console.log("URL:", url);
-console.log("Consumer Key:", consumerKey);
-console.log("Consumer Secret:", consumerSecret);
 
 if (!url || !consumerKey || !consumerSecret) {
   throw new Error("Missing necessary environment variables");

@@ -22,6 +22,7 @@ function Orders() {
       try {
         const userId = decodeBase64Id(currentUser.id);
         const jwt = localStorage.getItem("jwt");
+        
         const ordersData = await getOrdersByUser(currentUser.email, jwt);
         setOrders(ordersData);
       } catch (error) {
@@ -76,24 +77,24 @@ function Orders() {
                   {orders.map((order) => (
                     <tr key={order.id}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {order.orderNumber}
+                        #{order.number}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {order.status}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(order.date).toLocaleDateString()}
+                        {new Date(order.date_created.date).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">
-                        {order.status == "COMPLETED" &&
-                          order.downloadableItems.nodes.map((item) => (
+                        {order.status == "completed" &&
+                          order.line_items.map((item) => (
                             <Link
-                              href={item.url}
+                              href={item.downloads[0].download_url}
                               target="_blank"
                               key={item.id}
                               className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
                             >
-                              {item.name}
+                              {item.downloads[0].name}
                             </Link>
                           ))}
                       </td>
